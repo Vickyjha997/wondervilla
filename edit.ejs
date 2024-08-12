@@ -1,0 +1,79 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+<h3>Editing <%=list.title %> Form</h3>
+<div class="row mt-3">
+  <div class="col-8 offset-2">
+    <form
+      method="post"
+      action="/listings/<%=list.id%>?_method=PUT"
+      class="needs-validation"
+      novalidate
+      
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label">title:</label>
+        <input
+          type="text"
+          name="title"
+          placeholder="Enter a Title"
+          class="form-control"
+          value="<%=list.title%>"
+          required
+          
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea
+          name="description"
+          placeholder="Enter a Description"
+          class="form-control"
+          required
+        >
+<%=list.description%></textarea
+        >
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price:</label>
+          <input
+            type="number"
+            name="price"
+            placeholder="Enter Villa Price"
+            class="form-control"
+            required
+            value="<%=list.price%>"
+          />
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">country:</label>
+          <input
+            type="text"
+            name="country"
+            placeholder="Enter ur country"
+            class="form-control"
+            required
+            value="<%=list.country%>"
+          />
+        </div>
+      </div>
+
+      <div class="mb3">
+        <label for="location" class="form-label">location:</label>
+        <input
+          type="text"
+          name="location"
+          placeholder="Enter ur villa location"
+          class="form-control"
+          required
+          value="<%=list.location%>"
+        /><br /><br />
+      </div>
+
+      <button class="btn btn-dark edit-btn mt-3">Update</button>
+      <br /><br />
+    </form>
+  </div>
+</div>

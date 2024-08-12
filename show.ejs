@@ -1,0 +1,112 @@
+<% layout('/layouts/boilerplate') -%>
+<div class="row mt-3">
+  <div class="col-8 offset-3">
+    <h3>Listing Details</h3>
+  </div>
+
+  <div class="card col-6 offset-3 show-card">
+    <img
+      src="<%=list.image.url%>"
+      class="card-img-top show-img"
+      alt="listing_image"
+    />
+    <div class="card-body">
+      <p class="card-text">
+        <b><%=list.title %></b> <br />
+        <%= list.description %> <br />
+        &#8377;<%=list.price.toLocaleString("en-IN")%> <br />
+        <%=list.country%> <br />
+        <%=list.location%>
+      </p>
+    </div>
+    <br />
+    <div class="btns">
+      <form method="get" action="/listings/<%=list.id%>/edit">
+        <button
+          class="btn offset-3"
+          style="background-color: crimson; color: cornsilk; margin-left: -5px"
+        >
+          Edit
+        </button>
+      </form>
+
+      <form method="post" action="/listings/<%=list.id%>/delete?_method=DELETE">
+        <button class="btn btn-dark offset-3">Delete</button>
+      </form>
+    </div>
+    <form
+      method="post"
+      action="/listings/<%=list.id%>/reviews"
+      novalidate
+      class="needs-validation"
+    >
+      <div>
+        <hr />
+
+        <h4><b>Leave a Review </b></h4>
+        <div class="rating">
+          <input type="radio" name="rating" value="5" id="5" /><label for="5"
+            >☆</label
+          >
+          <input type="radio" name="rating" value="4" id="4" /><label for="4"
+            >☆</label
+          >
+          <input type="radio" name="rating" value="3" id="3" /><label for="3"
+            >☆</label
+          >
+          <input type="radio" name="rating" value="2" id="2" /><label for="2"
+            >☆</label
+          >
+          <input type="radio" name="rating" value="1" id="1" /><label for="1"
+            >☆</label
+          >
+        </div>
+
+        <div
+          class="comment"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <label for="comment"></label>
+          <textarea
+            type="text"
+            name="comment"
+            id="comment"
+            placeholder="Enter your comment here"
+            class="form-control"
+            required
+          ></textarea>
+        </div>
+        <br />
+        <button
+          class="btn offset-5"
+          style="background-color: crimson; color: cornsilk"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+    <hr />
+
+    <h4><b>All Reviews</b></h4>
+    <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1">
+      <% for(review of list.reviews){ %>
+
+      <div class="card">
+        <div class="card-header">Keshav</div>
+        <div class="card-body">
+          <h5 class="card-title"><%= review.rating %> Star</h5>
+          <p class="card-text"><%= review.comment %></p>
+        </div>
+        <form
+          method="post"
+          action="/listings/<%=list.id%>/reviews/<%= review.id %>/?_method=DELETE"
+        >
+          <button class="btn btn-dark offset-3">Delete</button>
+        </form>
+      </div>
+
+      <%} %>
+    </div>
+  </div>
+  <br />
+</div>
